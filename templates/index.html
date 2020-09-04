@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  {% if is_gallery %}
+    <title>IFCB guide</title>
+  {% else %}
+    <title>{{ class_name }}</title>
+  {% endif %}
+
+  <!-- Bootstrap core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../css/simple-sidebar.css" rel="stylesheet">
+  <link href="../css/ifcb.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <div class="d-flex" id="wrapper">
+
+    <!-- Sidebar -->
+    <div class="bg-light border-right" id="sidebar-wrapper">
+      <div class="sidebar-heading">IFCB guide</div>
+      <div class="list-group list-group-flush">
+        <a href="index.html" class="list-group-item list-group-item-action bg-light">Gallery</a>
+        {% for group_name in group_names %}
+        <a href="{{ group_name }}.html" class="list-group-item list-group-item-action bg-light small">{{ group_name }}</a>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+
+      {% if is_gallery %}
+
+        {% for group in groups %}
+          <div class="container-fluid">
+            <div class="row justify-content-md-center">
+              <h1>{{ group.name }}</h1>
+            </div>
+            {% for row in group.rows %}
+            <div class="row justify-content-md-center">
+              {% for col in row %}
+                <div class="col-md-auto">
+                  <a href="{{ col.class_name }}.html">{{ col.class_name }}</a>
+                  <br/>
+                  <a href="{{ col.class_name }}.html"><img src="{{ col.img_src }}" class="gallery"></a>
+                </div>
+              {% endfor %}
+            </div>
+            {% endfor %}
+          </div>
+        {% endfor %}
+
+      {% else %}
+
+      <div class="container-fluid">
+
+        <div class="row justify-content-md-center">
+          <h1>{{ class_name }}</h1>
+        </div>
+
+        <div class="row justify-content-md-center">
+          {% for image in images %}
+          <span class="d-inline-block p-2">
+            <a href="{{ image.href }}">{{ image.pid }}</a>
+            <br/>
+            <a href="{{ image.href }}">
+              <img src="{{ image.src }}">
+            </a>
+          </span>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% endif %}
+
+    </div>
+    <!-- /#page-content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
